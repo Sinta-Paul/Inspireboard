@@ -1,0 +1,27 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'styles/mood_boardstyle.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Great Vibes" rel="stylesheet">
+    </head>
+    <body>
+        <div class="grids">
+            <div class="side1">
+                <div class="mainheading">InspireBoard</div>
+                <div class="caption">Create stunning mood boards with ease using our intuitive web application. Effortlessly organize and curate images, colors, and textures to bring your creative visions to life.</div>
+            </div>
+            <div class="logincontainer">
+                <div class="heading">Login</div>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <p>Username:</p>
+                        <input type="text" name="username"/>
+                        <p>Password:</p>
+                        <input type="password" name="password"/><br>
+                        <input type="submit" value="Login"/>
+                    </form>
+            </div>
+        </div>
+    </body>
+</html>

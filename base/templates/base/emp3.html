@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'styles/mood_boardstyle.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Bebas Neue" rel="stylesheet">
+    </head>
+    <body>
+        <div class="tempmain">
+            <div class="navbar">
+                <ul>
+                    <li><a class="shuffletemp" href="{% url 'shuffle' user.username moodboard.name 't3' %}" >Shuffle</a></li>
+                  <li><a class="exporttemp" href="{% url 'ss' %}" >Export</a></li>
+                  <li><a class="logouttemp" href="{% url 'logout' %}">Logout</a></li>
+                </ul>   
+            </div>
+            <div class="bg3">
+            <div class="tempcards3">
+            {% for images in images %}
+                <img class="card3" src="{{ images.image.url }}" height="180px" width="180px">
+            {% endfor %}
+        </div>
+            <div class="tempheadings3">
+                <div class="temphead3">{{moodboard.name}}</div>
+                <div class="mockup">MOCKUP</div>
+                <div class="tempcaption3">{{moodboard.description}}</div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>

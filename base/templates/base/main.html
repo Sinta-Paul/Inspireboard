@@ -1,0 +1,107 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'styles/mood_boardstyle.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Great Vibes" rel="stylesheet">
+    </head>
+    <body>
+          <div class="mainbody">
+        <div class="navbar">
+          <ul>
+            <li><a class="export" href="{% url 'ss' %}" class="export">Export</a></li>
+            <li><a class="logout" href="{% url 'logout' %}" class="login">Logout</a></li>
+          </ul>
+          
+      </div>
+      <div class="headings">
+        <div class="boardheading">{{moodboard.name}}</div>
+        <div class="boardcaption">{{moodboard.description}}</div>
+      </div>
+        <div class="im">
+            {% for images in images %}
+            <div class="draggable" draggable="true">
+            <img src="{{ images.image.url }}" width="200px" height="200px"></div>
+            {% endfor %}
+        </div>
+      </div>
+        <div class="board" id="getData" ondrop="drop(event)" ondragover="allowDrop(event)">
+    </div>
+</div>
+</div>
+<script>
+    // get all draggable elements
+    var draggableItems = document.querySelectorAll('.draggable');
+
+    // add event listeners for each draggable element
+    draggableItems.forEach(function(item) {
+      // initialize variables
+      var isDragging = false;
+      var currentX;
+      var currentY;
+      var initialX;
+      var initialY;
+      var xOffset = 0;
+      var yOffset = 0;
+
+      // add event listeners for mouse/touch events
+      item.addEventListener('mousedown', dragStart);
+      item.addEventListener('touchstart', dragStart);
+
+      item.addEventListener('mouseup', dragEnd);
+      item.addEventListener('touchend', dragEnd);
+
+      item.addEventListener('mousemove', drag);
+      item.addEventListener('touchmove', drag);
+
+      // drag start function
+      function dragStart(e) {
+        if (e.type === 'touchstart') {
+          initialX = e.touches[0].clientX - xOffset;
+          initialY = e.touches[0].clientY - yOffset;
+        } else {
+          initialX = e.clientX - xOffset;
+          initialY = e.clientY - yOffset;
+        }
+
+        if (e.target === item) {
+          isDragging = true;
+        }
+      }
+
+      // drag function
+      function drag(e) {
+        if (isDragging) {
+          e.preventDefault();
+
+          if (e.type === 'touchmove') {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+          } else {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+          }
+
+          xOffset = currentX;
+          yOffset = currentY;
+
+          setTranslate(currentX, currentY, item);
+        }
+      }
+
+      // drag end function
+      function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+
+        isDragging = false;
+      }
+
+      // set translate function
+      function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      }
+    });
+    </script>
+    </body>
+</html>

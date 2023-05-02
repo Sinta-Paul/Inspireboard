@@ -1,0 +1,23 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'styles/mood_boardstyle.css' %}?{% now 'U' %}">
+        <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar">
+            <ul>
+            <li><a class="create" href="{% url 'create' 'sinta' 'none' %}">Create mood board</a></li>
+        </ul>
+        </div>
+        <div class="dashboard">
+            <div class="temph">Select from Templates</div>
+            <div class="tempcontainer">
+            <div class="temps"><img src="{% static 'styles/boho.png' %}" width="350px" height="200px"><a class="tempbutton" href="{% url 'create' user.username 't1' %}">Boho</a><p>Unleash your free-spirited side with our boho moodboard template. Featuring a blend of earthy tones, and eclectic patterns this template is perfect for expressing your bohemian style and capturing your wanderlust</p></div> 
+            <div class="temps"><img src="{% static 'styles/winter.png' %}" width="350px" height="200px"><a class="tempbutton" href="{% url 'create' user.username 't2' %}">Winter Wonderland</a><p>Bring the beauty of winter indoors with our winter moodboard template, showcasing frosty blues, and snowy whites for a magical winter wonderland feel.</p></div>
+            <div class="temps"><img src="{% static 'styles/photo.png' %}" width="350px" height="200px"><a class="tempbutton" href="{% url 'create' user.username 't3' %}">Photography</a><p> The perfect tool for creatives looking to showcase their visual style and inspiration. With a clean and minimal design, this template allows you to easily compile and organize your photography references for your next project.</p></div>
+        </div>
+        </div>
+        </div>
+    </body>
+</html>
